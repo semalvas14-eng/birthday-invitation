@@ -1,0 +1,519 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f9e9e8">
+
+<title>Приглашение на юбилей Натальи Васильевны</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rose: #b86e7d;
+  --ink: #674d50;
+  --paper: #fffaf7;
+  --pink: #f5e1e2;
+  --gold: #b79a70;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 300;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 12px;
+  border: 1px solid #d8b6b6;
+  pointer-events: none;
+  z-index: 5;
+}
+
+main {
+  overflow: hidden;
+}
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px 22px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 15% 20%, #fff 0, transparent 35%),
+    radial-gradient(ellipse at 90% 80%, #f1d5d9 0, transparent 42%),
+    linear-gradient(145deg, #fffaf7, #f7e8e7);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #d8b5b4;
+  border-radius: 50%;
+  opacity: .45;
+}
+
+.hero::before {
+  top: -90px;
+  left: -60px;
+}
+
+.hero::after {
+  bottom: -100px;
+  right: -40px;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: auto;
+}
+
+.eyebrow {
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--rose);
+}
+
+h1,
+h2,
+.script {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(52px, 10vw, 100px);
+  line-height: .88;
+  margin: 28px 0 18px;
+  color: #9e5c6c;
+}
+
+h1 span {
+  display: block;
+  font-size: .48em;
+  letter-spacing: .04em;
+  margin-bottom: 18px;
+  color: #805c61;
+}
+
+.bow {
+  font-size: 44px;
+  color: #c18a96;
+  line-height: 1;
+}
+
+.lead {
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 2;
+  margin: 22px 0;
+}
+
+.date {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  color: #9e5c6c;
+  margin: 22px 0 8px;
+}
+
+.time {
+  font-size: 12px;
+  letter-spacing: .18em;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid #b97986;
+  color: #8f5361;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 30px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  margin-top: 28px;
+  background: #fff9f7;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.button:hover {
+  background: #b97986;
+  color: white;
+  transform: translateY(-2px);
+}
+
+section {
+  padding: 82px 24px;
+  text-align: center;
+}
+
+.section-inner {
+  max-width: 650px;
+  margin: auto;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+h2 {
+  font-size: clamp(38px, 7vw, 58px);
+  margin: 15px 0;
+  color: #9e5c6c;
+}
+
+.copy {
+  font-size: 13px;
+  line-height: 2;
+  max-width: 520px;
+  margin: 20px auto;
+}
+
+.divider {
+  color: #c18a96;
+  letter-spacing: .6em;
+  margin: 28px 0;
+}
+
+.details {
+  background: #f7e8e7;
+}
+
+.detail-card {
+  max-width: 480px;
+  margin: 28px auto 0;
+  border: 1px solid #d9b8b9;
+  padding: 30px 22px;
+  background: #fffaf7;
+}
+
+.detail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--gold);
+  margin-top: 18px;
+}
+
+.detail-value {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 25px;
+  margin-top: 7px;
+}
+
+.note {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #8b7476;
+}
+
+.rsvp {
+  background: linear-gradient(#fffaf7, #f5e3e4);
+}
+
+form {
+  max-width: 420px;
+  margin: 25px auto 0;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 11px;
+  margin: 15px 0 7px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d9b8b9;
+  background: #fffdfb;
+  padding: 13px;
+  font: 12px 'Montserrat', Arial, sans-serif;
+  color: var(--ink);
+  border-radius: 3px;
+}
+
+form button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.footer {
+  font-size: 10px;
+  letter-spacing: .12em;
+  padding: 30px 20px;
+  text-align: center;
+  color: #9a777d;
+}
+
+.floating {
+  position: fixed;
+  right: 26px;
+  bottom: 24px;
+  z-index: 7;
+  border: 1px solid #d6aeb5;
+  background: #fffaf7;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  color: #a45d6d;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px #a45d6d22;
+}
+
+@media (min-width: 700px) {
+  section {
+    padding: 110px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero .wrap {
+    animation: appear 1.2s ease both;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="bow">୨୧</div>
+
+    <p class="eyebrow">
+      Приглашение на особенный вечер
+    </p>
+
+    <h1>
+      <span>Юбилей</span>
+      Натальи<br>Васильевны
+    </h1>
+
+    <p class="lead">
+      С радостью приглашаю вас разделить<br>
+      со мной этот прекрасный день
+    </p>
+
+    <div class="divider">✧　♡　✧</div>
+
+    <div class="date">1 ноября 2026 года</div>
+    <div class="time">НАЧАЛО В 16:00</div>
+
+    <a class="button" href="#details">
+      ОТКРЫТЬ ПРИГЛАШЕНИЕ ↓
+    </a>
+  </div>
+</header>
+
+<section>
+  <div class="section-inner">
+    <div class="kicker">Дорогие мои</div>
+
+    <h2>Буду рада видеть вас</h2>
+
+    <p class="copy">
+      В жизни есть моменты, которые становятся особенно
+      тёплыми благодаря людям рядом. Я буду счастлива
+      провести этот день в кругу близких и дорогих мне
+      людей, разделить улыбки, добрые слова и прекрасные
+      воспоминания.
+    </p>
+
+    <div class="bow">♡</div>
+
+    <p class="copy">
+      Пусть этот вечер наполнится нежностью, радостью
+      и маленькими чудесами.
+    </p>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <div class="section-inner">
+    <div class="kicker">Сохраняйте дату</div>
+
+    <h2>Когда и где</h2>
+
+    <div class="detail-card">
+      <div class="detail-label">Дата</div>
+      <div class="detail-value">Воскресенье, 1 ноября</div>
+
+      <div class="detail-label">Время</div>
+      <div class="detail-value">16:00</div>
+
+      <div class="detail-label">Место встречи</div>
+      <div class="detail-value">
+        Будет сообщено дополнительно
+      </div>
+
+      <p class="note">
+        Информация о месте проведения появится здесь
+        после уточнения.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="rsvp" id="rsvp">
+  <div class="section-inner">
+    <div class="kicker">Пожалуйста, ответьте</div>
+
+    <h2>Вы придёте?</h2>
+
+    <p class="copy">
+      Мне будет очень приятно знать, смогу ли я
+      обнять вас в этот день.
+    </p>
+
+    <form id="replyForm">
+      <label for="guest">Ваше имя</label>
+      <input
+        id="guest"
+        name="guest"
+        required
+        placeholder="Как к вам обращаться?"
+      >
+
+      <label for="answer">Сможете прийти?</label>
+      <select id="answer" name="answer" required>
+        <option value="">Выберите ответ</option>
+        <option>С радостью буду!</option>
+        <option>К сожалению, не получится</option>
+        <option>Пока не знаю</option>
+      </select>
+
+      <label for="message">
+        Пожелание (необязательно)
+      </label>
+
+      <textarea
+        id="message"
+        name="message"
+        rows="3"
+        placeholder="Напишите пару тёплых слов…"
+      ></textarea>
+
+      <button class="button" type="submit">
+        ПОДГОТОВИТЬ ОТВЕТ
+      </button>
+
+      <p class="note" id="formNote">
+        Ответ можно подготовить здесь. Для получения
+        ответов от гостей необходимо подключить форму
+        к почте или сервису сбора ответов.
+      </p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  С любовью и нежностью · НАТАЛЬЯ ВАСИЛЬЕВНА · 2026
+</footer>
+
+</main>
+
+<button
+  class="floating"
+  id="musicButton"
+  aria-label="Включить музыку"
+  title="Музыка"
+>♫</button>
+
+<audio id="music" loop></audio>
+
+<script>
+const music = document.getElementById('music');
+const musicButton = document.getElementById('musicButton');
+
+musicButton.addEventListener('click', () => {
+  if (!music.src) {
+    alert(
+      'Чтобы добавить музыку, укажите адрес MP3-файла ' +
+      'в атрибуте src элемента audio.'
+    );
+    return;
+  }
+
+  if (music.paused) {
+    music.play();
+    musicButton.textContent = 'Ⅱ';
+  } else {
+    music.pause();
+    musicButton.textContent = '♫';
+  }
+});
+
+document.getElementById('replyForm').addEventListener(
+  'submit',
+  (event) => {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+
+    const guest = form.get('guest');
+    const answer = form.get('answer');
+    const message = form.get('message') || '—';
+
+    const text =
+      'Ответ на приглашение Натальи Васильевны\n' +
+      'Имя: ' + guest + '\n' +
+      'Ответ: ' + answer + '\n' +
+      'Пожелание: ' + message;
+
+    const note = document.getElementById('formNote');
+
+    note.textContent =
+      'Ваш ответ подготовлен. Для отправки используйте ' +
+      'подключённый сервис сбора ответов. Пока форма ' +
+      'не отправляет данные организатору автоматически.';
+
+    console.log(text);
+  }
+);
+</script>
+
+</body>
+</html>
