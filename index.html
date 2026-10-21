@@ -486,33 +486,52 @@ musicButton.addEventListener('click', () => {
   }
 });
 
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQ-SwQh-ko6MANuh3j-dW6x7UkV3pCKZQi6W5cQYNyKnk9rMEdCkQiBAcOwy_eETcqDw/exec';
+
 document.getElementById('replyForm').addEventListener(
   'submit',
-  (event) => {
+  async function (event) {
     event.preventDefault();
 
-    const form = new FormData(event.currentTarget);
-
-    const guest = form.get('guest');
-    const answer = form.get('answer');
-    const message = form.get('message') || '—';
-
-    const text =
-      'Ответ на приглашение Натальи Васильевны\n' +
-      'Имя: ' + guest + '\n' +
-      'Ответ: ' + answer + '\n' +
-      'Пожелание: ' + message;
-
+    const form = event.currentTarget;
+    const button = form.querySelector('button[type="submit"]');
     const note = document.getElementById('formNote');
 
-    note.textContent =
-      'Ваш ответ подготовлен. Для отправки используйте ' +
-      'подключённый сервис сбора ответов. Пока форма ' +
-      'не отправляет данные организатору автоматически.';
+    const data = new URLSearchParams({
+      guest: form.elements.guest.value.trim(),
+      answer: form.elements.answer.value,
+      message: form.elements.message.value.trim()
+    });
 
-    console.log(text);
+    button.disabled = true;
+    button.textContent = 'ОТПРАВКА...';
+    note.textContent = 'Отправляем ваш ответ…';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: data
+      });
+
+      note.textContent =
+        'Спасибо за ответ! Пожалуйста, убедитесь, ' +
+        'что он появился в таблице организатора.';
+
+      form.reset();
+
+    } catch (error) {
+      note.textContent =
+        'Не удалось отправить ответ. Проверьте интернет ' +
+        'и попробуйте ещё раз.';
+    } finally {
+      button.disabled = false;
+      button.textContent = 'ОТПРАВИТЬ ОТВЕТ';
+    }
   }
 );
+  
 </script>
 
 </body>
