@@ -541,36 +541,37 @@ function doPost(e) {
   
 </script>
 
-</body><script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8-l-_ZHw7-JAqssiNYBBQou4No1xAw5xdCF3kPpxmxecY05CwriuyKC1cwF9fDHuXdw/exec';
+</body>
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwEW8_Ol-96DzwrzkdszuBlzcKSRC-jvoC7uZIH12fRfi3zGgXd6q0INhWTjb3RqZBQcQ/exec';
 
-const form = document.getElementById('replyForm');
+const replyForm = document.getElementById('replyForm');
 const formNote = document.getElementById('formNote');
 
-if (form) {
-  form.addEventListener('submit', async function(event) {
+if (replyForm) {
+  replyForm.addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const data = new FormData(form);
-    const guest = data.get('guest') || '';
-    const answer = data.get('answer') || '';
-    const message = data.get('message') || '';
+    const formData = new FormData(replyForm);
+    const guest = String(formData.get('guest') || '').trim();
+    const answer = String(formData.get('answer') || '').trim();
+    const message = String(formData.get('message') || '').trim();
 
-    if (!guest.trim() || !answer.trim()) {
+    if (!guest || !answer) {
       if (formNote) {
-        formNote.textContent = 'Заполни имя и выбери ответ.';
+        formNote.textContent = 'Укажи имя и выбери ответ.';
       }
       return;
-    }
-
-    if (formNote) {
-      formNote.textContent = 'Отправляем ответ...';
     }
 
     const params = new URLSearchParams();
     params.append('guest', guest);
     params.append('answer', answer);
     params.append('message', message);
+
+    if (formNote) {
+      formNote.textContent = 'Отправляем ответ...';
+    }
 
     try {
       await fetch(SCRIPT_URL, {
@@ -581,11 +582,14 @@ if (form) {
 
       if (formNote) {
         formNote.textContent =
-          'Спасибо! Проверь, что ответ появился в таблице.';
+          'Спасибо! Проверь, что ответ сохранился.';
       }
-      form.reset();
+
+      replyForm.reset();
+
     } catch (error) {
-      console.error('Ошибка отправки:', error);
+      console.error('Ошибка отправки формы:', error);
+
       if (formNote) {
         formNote.textContent =
           'Не удалось отправить ответ. Попробуй ещё раз.';
@@ -596,4 +600,4 @@ if (form) {
 </script>
 </body>
 </html>
-</html>
+
