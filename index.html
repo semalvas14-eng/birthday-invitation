@@ -487,50 +487,57 @@ musicButton.addEventListener('click', () => {
 });
 
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8-l-_ZHw7-JAqssiNYBBQou4No1xAw5xdCF3kPpxmxecY05CwriuyKC1cwF9fDHuXdw/exec';
 
-document.getElementById('replyForm').addEventListener(
-  'submit',
-  async function (event) {
-    event.preventDefault();
+const SHEET_ID = '1bk-yjq_3lMwrA2fSLiDUqDCPhwkRSB_Lz7sH75sT9Gc';
+const SHEET_NAME = 'Ответы';
 
-    const form = event.currentTarget;
-    const button = form.querySelector('button[type="submit"]');
-    const note = document.getElementById('formNote');
+function doPost(e) {
+  try {
+    const sheetFile = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = sheetFile.getSheetByName(SHEET_NAME);
 
-    const data = new URLSearchParams({
-      guest: form.elements.guest.value.trim(),
-      answer: form.elements.answer.value,
-      message: form.elements.message.value.trim()
-    });
-
-    button.disabled = true;
-    button.textContent = 'ОТПРАВКА...';
-    note.textContent = 'Отправляем ваш ответ…';
-
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: data
-      });
-
-      note.textContent =
-        'Спасибо за ответ! Пожалуйста, убедитесь, ' +
-        'что он появился в таблице организатора.';
-
-      form.reset();
-
-    } catch (error) {
-      note.textContent =
-        'Не удалось отправить ответ. Проверьте интернет ' +
-        'и попробуйте ещё раз.';
-    } finally {
-      button.disabled = false;
-      button.textContent = 'ОТПРАВИТЬ ОТВЕТ';
+    if (!sheet) {
+      sheet = sheetFile.insertSheet(SHEET_NAME);
     }
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        'Дата и время',
+        'Имя гостя',
+        'Ответ',
+        'Сообщение'
+      ]);
+    }
+
+    if (!e || !e.parameter) {
+      throw new Error('Данные формы не получены');
+    }
+
+    const name = e.parameter.guest || '';
+    const answer = e.parameter.answer || '';
+    const message = e.parameter.message || '';
+
+    if (!name.trim() || !answer.trim()) {
+      throw new Error('Не заполнено имя или ответ');
+    }
+
+    sheet.appendRow([
+      new Date(),
+      name,
+      answer,
+      message
+    ]);
+
+    return ContentService
+      .createTextOutput('OK');
+
+  } catch (error) {
+    console.error(error);
+
+    return ContentService
+      .createTextOutput('ERROR: ' + error.message);
   }
-);
+}
   
 </script>
 
